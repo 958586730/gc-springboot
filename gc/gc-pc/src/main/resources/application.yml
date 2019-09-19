@@ -1,0 +1,115 @@
+
+#--------------------系统 配置---------------------
+
+jasypt:
+  encryptor:
+    password: gc
+
+http:
+  encryption:
+ #   request: true
+    request: false
+    key: ${jasypt.encryptor.password}
+
+
+#--------------------日志 配置---------------------
+
+logging:
+  level:
+    com.yfc: debug
+
+#--------------------数据源 配置---------------------
+
+spring:
+  datasource:
+    read:
+      url: jdbc:mysql://39.98.174.125:3308/gc?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull
+      username: gc
+      password: p7mRYXGTLkJ7Aije
+      driver-class-name: com.mysql.jdbc.Driver
+    writer:
+      url: jdbc:mysql://39.98.174.125:3308/gc?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull
+      username: gc
+      password: p7mRYXGTLkJ7Aije
+      driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      stat-view-servlet:
+        login-username: root
+        login-password: root
+      aop-patterns: com.yfc.gc.pc.service.*
+
+#--------------------文件上传大小 配置---------------------
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2048MB  #单个文件的最大上限
+      max-request-size: 2048MB #单个请求的文件总大小上限
+
+#--------------------aop 配置---------------------
+
+  aop:
+    proxy-target-class: false
+
+#--------------------session 配置---------------------
+
+  session:
+    store-type: redis
+
+#--------------------redis 配置---------------------
+
+  redis:
+    host: localhost
+    port: 6379
+
+#--------------------分页插件 配置---------------------
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: 'true'
+  params: count=countSql
+
+#--------------------tk mapper 配置---------------------
+
+mapper:
+  mappers:
+    - com.yfc.gc.core.base.mapper.ReadBaseMapper
+    - com.yfc.gc.core.base.mapper.WriterBaseMapper
+  not-empty: false
+  identity: MYSQL
+
+#--------------------端口和url 配置---------------------
+
+server:
+  servlet:
+    context-path: /gc-pc
+  port: 8084
+
+#--------------------jwt 配置---------------------
+
+jwt:
+  secret: gc
+  header: Authorization
+  expiration: 30
+  tokenHead: 'Bearer '
+
+#--------------------管理员账号 配置---------------------
+
+admin:
+  u: admin
+  p: 123456
+
+#--------------------文件上传路径 配置---------------------
+
+filePath: "/mnt/"
+
+#--------------------快递100 配置---------------------
+
+express100:
+  url: http://poll.kuaidi100.com/poll/query.do
+  key: SSsmVSHA6731
+  customer: 8B761009A08D0BB8580FC2F5C7C706C9
+
+#--------------------PDF导出 中文字体配置目录---------------------
+
+typePath: "/opt/gc-pc/type/SIMYOU.TTF"

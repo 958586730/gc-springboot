@@ -1,0 +1,108 @@
+
+#--------------------系统 配置---------------------
+
+http:
+  encryption:
+    request: false
+    key: gc
+
+
+#--------------------日志 配置---------------------
+
+logging:
+  level:
+    com.yfc: debug
+
+#--------------------数据源 配置---------------------
+
+spring:
+  datasource:
+    read:
+      url: jdbc:mysql://39.98.174.125:3308/gc?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull
+      username: gc
+      password: p7mRYXGTLkJ7Aije
+      driver-class-name: com.mysql.jdbc.Driver
+    writer:
+      url: jdbc:mysql://39.98.174.125:3308/gc?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull
+      username: gc
+      password: p7mRYXGTLkJ7Aije
+      driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      stat-view-servlet:
+        login-username: root
+        login-password: root
+      aop-patterns: com.yfc.gc.app.service.*
+
+#--------------------aop 配置---------------------
+
+  aop:
+    proxy-target-class: false
+
+#--------------------session 配置---------------------
+
+  session:
+    store-type: redis
+
+#--------------------redis 配置---------------------
+
+  redis:
+    host: localhost
+    port: 6379
+
+#--------------------分页插件 配置---------------------
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: 'true'
+  params: count=countSql
+
+#--------------------tk mapper 配置---------------------
+
+mapper:
+  mappers:
+    - com.yfc.gc.core.base.mapper.ReadBaseMapper
+    - com.yfc.gc.core.base.mapper.WriterBaseMapper
+  not-empty: false
+  identity: MYSQL
+
+#--------------------端口和url 配置---------------------
+
+server:
+  servlet:
+    context-path: /gc-app
+  port: 8083
+
+#--------------------jwt 配置---------------------
+
+jwt:
+  secret: gc
+  header: Authorization
+  expiration: 30
+  tokenHead: 'Bearer '
+
+#--------------------小程序 配置---------------------
+
+wechat:
+  url: https://api.weixin.qq.com/sns/jscode2session
+  appId: wx5b08d0de8aa0acde
+  secret: 73ec64da88d231dae9f8f5763f2963ae
+  mchId: 1507373141
+  payKey: c5qzkyciumdu3c3bvyfb51vm32i4kqj0
+  tradeType: JSAPI
+  certPath: /opt/gc-app/cert/apiclient_cert.p12
+  grantType: authorization_code
+  notifyOrdinaryUrl: https://zqd.yiyangrenhe.com/gc-app/api/wx/shop/commodity/notifyOrdinary
+  notifyPackageUrl: https://zqd.yiyangrenhe.com/gc-app/api/wx/shop/package/notifyPackage
+  notifyGroupUrl: https://zqd.yiyangrenhe.com/gc-app/api/wx/shop/group/notifyGroup
+  notifyCampaignUrl: https://zqd.yiyangrenhe.com/gc-app/api/wx/shop/campaign/notifyCampaign
+
+#--------------------快递100 配置---------------------
+
+express100:
+  url: http://poll.kuaidi100.com/poll/query.do
+  key: SSsmVSHA6731
+  customer: 8B761009A08D0BB8580FC2F5C7C706C9
+
+
+

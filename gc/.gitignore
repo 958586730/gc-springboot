@@ -1,0 +1,7 @@
+.idea
+.settings
+.project
+.classpath
+*.iml
+target
+gc-generator/src/main/java/*

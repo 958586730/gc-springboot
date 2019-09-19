@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yfc.gc.mapper.read.species.SpeciesReadMapper">
+    <resultMap id="BaseResultMap" type="com.yfc.gc.bean.species.Species">
+        <id column="ID" jdbcType="INTEGER" property="id"/><!-- 种类ID -->
+        <result column="TYPE_NAME" jdbcType="VARCHAR" property="typeName"/><!-- 种类名 -->
+        <result column="TYPE_NAME_ENG" jdbcType="VARCHAR" property="typeNameEng"/><!-- 英文名 -->
+        <result column="LOGO" jdbcType="VARCHAR" property="logo"/><!-- 标志 -->
+        <result column="IMG" jdbcType="VARCHAR" property="img"/><!-- 图标 -->
+        <result column="RETRACTION_IMG" jdbcType="VARCHAR" property="retractionImg"/><!-- 缩略图 -->
+        <result column="CITY" jdbcType="VARCHAR" property="city"/><!-- 所属地区 -->
+        <result column="TYPE_DESCRIBE" jdbcType="VARCHAR" property="typeDescribe"/><!-- 描述 -->
+        <result column="TYPE_ORDER" jdbcType="VARCHAR" property="typeOrder"/><!-- 表示顺序 -->
+        <result column="CREATED_BY" jdbcType="VARCHAR" property="createdBy"/><!-- 创建人 -->
+        <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime"/><!-- 创建时间 -->
+        <result column="UPDATED_BY" jdbcType="VARCHAR" property="updatedBy"/><!-- 更新人 -->
+        <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime"/><!-- 更新时间 -->
+    </resultMap>
+
+    <select id="selectSpeciesList" resultMap="BaseResultMap" parameterType="com.yfc.gc.bean.species.Species">
+        SELECT
+            TYPE_ORDER,
+            CITY,
+            IMG,
+            LOGO,
+            RETRACTION_IMG,
+            TYPE_NAME,
+            TYPE_NAME_ENG,
+            TYPE_DESCRIBE
+        FROM T_TYPE T
+        LEFT JOIN T_SYSTEM_VAR SYSTEM
+        ON T.CITY = SYSTEM.CODEVAL
+        WHERE 1=1
+        <if test="typeName != null and typeName != ''">
+            AND T.TYPE_NAME LIKE CONCAT(CONCAT('%',#{typeName}),'%')
+        </if>
+        <if test="typeNameEng != null and typeNameEng != ''">
+            AND T.TYPE_NAME_ENG LIKE CONCAT(CONCAT('%',#{typeNameEng}),'%')
+        </if>
+        <if test="typeName != null and typeName != ''">
+            AND T.TYPE_NAME LIKE CONCAT(CONCAT('%',#{typeName}),'%')
+        </if>
+    </select>
+</mapper>

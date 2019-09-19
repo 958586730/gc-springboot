@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <properties resource="conf/config.properties"/>
+
+    <!-- 数据库驱动包位置 -->
+    <classPathEntry
+            location="${project.dir}/src/main/resources/lib/mysql-connector-java-5.1.47.jar" />
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <!-- TKmybatis配置 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <!--实体类-->
+        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+            <property name="targetProject" value="src/main/java"/>
+            <property name="targetPackage" value="${targetEntityPackage}"/>
+            <property name="templatePath" value="generator/Bean.ftl"/>
+            <!--<property name="mapperSuffix" value="Mapper"/>-->
+            <property name="fileName" value="${tableClass.shortClassName}.java"/>
+        </plugin>
+
+        <!--mapper read类-->
+        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+            <property name="targetProject" value="src/main/java"/>
+            <property name="targetPackage" value="${targetReadMapperPackage}"/>
+            <property name="templatePath" value="generator/ReadMapper.ftl"/>
+            <property name="mapperSuffix" value="ReadMapper"/>
+            <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.java"/>
+        </plugin>
+
+        <!--mapper read xml类-->
+        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+            <property name="targetProject" value="src/main/java"/>
+            <property name="targetPackage" value="${targetReadMapperPackage}"/>
+            <property name="templatePath" value="generator/ReadMapperXML.ftl"/>
+            <property name="mapperSuffix" value="ReadMapper"/>
+            <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.xml"/>
+        </plugin>
+
+        <!--mapper writer类-->
+        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+            <property name="targetProject" value="src/main/java"/>
+            <property name="targetPackage" value="${targetwriterMapperPackage}"/>
+            <property name="templatePath" value="generator/WriterMapper.ftl"/>
+            <property name="mapperSuffix" value="WriterMapper"/>
+            <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.java"/>
+        </plugin>
+
+        <!--mapper writer xml类-->
+        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+            <property name="targetProject" value="src/main/java"/>
+            <property name="targetPackage" value="${targetwriterMapperPackage}"/>
+            <property name="templatePath" value="generator/WriterMapperXML.ftl"/>
+            <property name="mapperSuffix" value="WriterMapper"/>
+            <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.xml"/>
+        </plugin>
+
+        <!--service 类-->
+        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+            <property name="targetProject" value="src/main/java"/>
+            <property name="targetPackage" value="${targetServicePackage}"/>
+            <property name="templatePath" value="generator/IService.ftl"/>
+            <property name="fileName" value="I${tableClass.shortClassName}Service.java"/>
+        </plugin>
+
+        <!--service impl类-->
+        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+            <property name="targetProject" value="src/main/java"/>
+            <property name="targetPackage" value="${targetServicePackage}.impl"/>
+            <property name="targetInterfacePackage" value="${targetServicePackage}"/>
+            <property name="templatePath" value="generator/ServiceImpl.ftl"/>
+            <property name="mapperWriterSuffix" value="WriterMapper"/>
+            <property name="targetWriterPackage" value="${targetwriterMapperPackage}"/>
+            <property name="mapperReadSuffix" value="ReadMapper"/>
+            <property name="targetReadPackage" value="${targetReadMapperPackage}"/>
+            <property name="fileName" value="${tableClass.shortClassName}ServiceImpl.java"/>
+        </plugin>
+
+        <!-- 数据库链接URL、用户名、密码 -->
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}" />
+        <!-- 生成模型的包名和位置 -->
+        <javaModelGenerator targetPackage="${targetEntityPackage}" targetProject="${targetJavaProject}/admin"/>
+        <!-- 生成的映射文件包名和位置 -->
+        <sqlMapGenerator targetPackage="${targetwriterMapperPackage}" targetProject="${targetJavaProject}/admin"/>
+        <!-- 生成service的包名和位置 -->
+        <javaClientGenerator targetPackage="${targetServicePackage}" targetProject="${targetJavaProject}/admin"
+                             type="XMLMAPPER"/>
+
+        <table tableName="t_system_var" domainObjectName="SystemVar">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+
+
+
+
+    </context>
+</generatorConfiguration>
