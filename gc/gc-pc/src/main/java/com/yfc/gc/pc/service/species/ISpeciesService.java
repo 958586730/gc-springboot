@@ -13,6 +13,6 @@ public interface ISpeciesService extends BaseService<Species> {
      * @Date: 2019/9/19 14:22
      * @Description: 垃圾种类一览
      */
-    List<Species> selectSpeciesList(Species species);
+    List<Species> selectSpeciesList(Species species); 
 
 }
