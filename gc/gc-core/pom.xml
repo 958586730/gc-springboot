@@ -23,7 +23,7 @@
 		<persistence.version>1.0</persistence.version>
 		<poi.version>3.17</poi.version>
 		<jjwt.version>0.9.1</jjwt.version>
-		<xml.version>1.4.7</xml.version>
+		<xml.version>1.4.16</xml.version>
 	</properties>
 
 	<dependencies>
